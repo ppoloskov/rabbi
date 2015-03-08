@@ -18,7 +18,7 @@ from datetime import datetime
 # Add to that file the line below:
 # FirewireGuid: 0xffffffffffffffff
 
-# Ctrl + C handling, process/skipped counting, free space cheking, socket for status checking, web
+# TODO: Ctrl + C handling, process/skipped counting, free space cheking, socket for status checking, web
 
 from os import walk, sep, stat
 from os.path import join, splitext, isdir, isfile
