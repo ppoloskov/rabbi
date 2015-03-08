@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # import mutagen
-import gpod
 import logging
 import os
 import subprocess
@@ -12,6 +11,9 @@ import multiprocessing
 from shutil import rmtree
 from datetime import datetime
 
+import gpod
+
+
 # To do that, run "sudo lsusb -v | grep -i Serial" (without the "") with your iPod plugged in,
 # this should print a 16 character long string like 00A1234567891231.
 # Once you have that number, create/edit /mnt/ipod/iPod_Control/Device/SysInfo
@@ -20,8 +22,7 @@ from datetime import datetime
 
 # TODO: Ctrl + C handling, process/skipped counting, free space cheking, socket for status checking, web
 
-from os import walk, sep, stat
-from os.path import join, splitext, isdir, isfile
+from os.path import splitext, isfile
 import audiotools
 import gio
 from gtk import gdk
@@ -107,9 +108,8 @@ def get_fs_freespace(pathname):
 def AddTrack(cpu, path):
     # track = gpod.itdb_track_new()
     # _log.info('Adding %s', path)
-    track = {'filetype' : '', 'title': '', 'album': '', 'artist': '', 'albumartist': '', 'genre': '', 'composer': '', \
-             'tracklen': 0, 'cd_nr': 0, 'cds': 0, 'track_nr': 0, 'tracks': 0, 'year': 0, 'bitrate': 0, \
-             'compilation': False, 'cover': '', 'path': ''}
+    track = dict(filetype='', title='', album='', artist='', albumartist='', genre='', composer='', tracklen=0, cd_nr=0,
+                 cds=0, track_nr=0, tracks=0, year=0, bitrate=0, compilation=False, cover='', path='')
 
     if splitext(path)[1] == '.mp3':
         track['filetype'] = 'MP3-file'
